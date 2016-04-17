@@ -1,9 +1,11 @@
-var path = require('path')
-var webpack = require('webpack')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
+'use strict'
+
+let path = require('path')
+let webpack = require('webpack')
+let HtmlWebpackPlugin = require('html-webpack-plugin')
 
 function makeWebpackConfig (options) {
-  var entry, plugins, cssLoaders, devtool
+  let entry, plugins, cssLoaders, devtool
 
   if (options.prod) {
     entry = [
