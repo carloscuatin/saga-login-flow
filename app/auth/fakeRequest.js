@@ -3,22 +3,17 @@ import server from './fakeServer'
 server.init()
 
 let fakeRequest = {
-  post (endpoint, data, callback) {
-    setTimeout(() => {
-      switch (endpoint) {
-        case '/login':
-          server.login(data.username, data.password, callback)
-          break
-        case '/register':
-          server.register(data.username, data.password, callback)
-          break
-        case '/logout':
-          server.logout(callback)
-          break
-        default:
-          break
-      }
-    }, (Math.random() * 2000) + 100)
+  post (endpoint, data) {
+    switch (endpoint) {
+      case '/login':
+        return server.login(data.username, data.password)
+      case '/register':
+        return server.register(data.username, data.password)
+      case '/logout':
+        return server.logOut()
+      default:
+        break
+    }
   }
 }
 

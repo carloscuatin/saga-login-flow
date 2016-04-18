@@ -9,37 +9,26 @@ if (global.process && process.env.NODE_ENV === 'test') {
 }
 
 let auth = {
-  login (username, password, callback) {
-    if (this.loggedIn()) {
-      callback(true)
-      return
-    }
+  login (username, password) {
+    if (this.loggedIn()) return Promise.resolve(true)
 
-    request.post('/login', {username, password}, (response) => {
-      if (response.authenticated) {
+    return request.post('/login', {username, password})
+      .then(response => {
         localStorage.token = response.token
-        callback(true)
-      } else {
-        callback(false, response.error)
-      }
-    })
+        return Promise.resolve(true)
+      })
   },
-  logOut (callback) {
-    request.post('/logout', {}, () => {
-      callback(true)
-    })
+  logOut () {
+    return request.post('/logout')
   },
   loggedIn () {
     return !!localStorage.token
   },
   register (username, password, callback) {
-    request.post('/register', {username, password}, (response) => {
-      if (response.registered) {
-        this.login(username, password, callback)
-      } else {
-        callback(false, response.error)
-      }
-    })
+    let self = this
+
+    return request.post('/register', {username, password})
+      .then(() => self.login(username, password))
   },
   onChange () {}
 }
