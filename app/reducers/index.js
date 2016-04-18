@@ -1,4 +1,4 @@
-import { CHANGE_FORM, SET_AUTH, SENDING_REQUEST } from '../actions/constants'
+import {CHANGE_FORM, SET_AUTH, SENDING_REQUEST} from '../actions/constants'
 
 let assign = Object.assign
 
