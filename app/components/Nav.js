@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 import LoadingButton from './LoadingButton'
 import {Link} from 'react-router'
 
+import {logout} from '../actions'
+
 class Nav extends Component {
   constructor (props) {
     super(props)
@@ -36,7 +38,7 @@ class Nav extends Component {
   }
 
   _logout () {
-    return
+    this.props.dispatch(logout())
   }
 }
 

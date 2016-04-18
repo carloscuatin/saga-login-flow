@@ -1,10 +1,14 @@
+import 'babel-polyfill'
+
 import React, {Component} from 'react'
 import ReactDOM from 'react-dom'
 import {Router, Route, browserHistory} from 'react-router'
 import {createStore, applyMiddleware} from 'redux'
+import createSagaMiddleware from 'redux-saga'
 import {Provider} from 'react-redux'
 import createLogger from 'redux-logger'
 import reducer from './reducers'
+import rootSaga from './sagas'
 
 import '../css/main.css'
 
@@ -16,7 +20,7 @@ import NotFound from './components/pages/NotFound'
 
 let logger = createLogger()
 
-let createStoreWithMiddleware = applyMiddleware(logger)(createStore)
+let createStoreWithMiddleware = applyMiddleware(logger, createSagaMiddleware(rootSaga))(createStore)
 let store = createStoreWithMiddleware(reducer)
 
 class LoginFlow extends Component {

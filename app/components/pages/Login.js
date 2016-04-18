@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import Form from '../Form'
 
+import {loginRequest} from '../../actions'
+
 class Login extends Component {
   constructor (props) {
     super(props)
@@ -26,7 +28,7 @@ class Login extends Component {
   }
 
   _login (username, password) {
-    return
+    this.props.dispatch(loginRequest({username: 'juan', password: 'password'}))
   }
 }
 
