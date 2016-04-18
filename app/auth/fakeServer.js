@@ -1,4 +1,5 @@
 import {hashSync, genSaltSync, compareSync} from 'bcryptjs'
+import genSalt from './salt'
 
 let users
 let localStorage
@@ -14,10 +15,11 @@ let server = {
   init () {
     if (localStorage.users === undefined || !localStorage.encrypted) {
       let juan = 'juan'
-      let juanPass = hashSync('password', salt)
+      let juanSalt = genSalt(juan)
+      let juanPass = hashSync('password', juanSalt)
 
       users = {
-        [juan]: juanPass
+        [juan]: hashSync(juanPass, salt)
       }
 
       localStorage.users = JSON.stringify(users)
@@ -60,10 +62,10 @@ let server = {
       }
     })
   },
-  logOut () {
+  logout () {
     return new Promise(resolve => {
       localStorage.removeItem('token')
-      resolve()
+      resolve(true)
     })
   },
   doesUserExist (username) {

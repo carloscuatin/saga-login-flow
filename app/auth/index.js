@@ -10,7 +10,7 @@ if (global.process && process.env.NODE_ENV === 'test') {
 
 let auth = {
   login (username, password) {
-    if (this.loggedIn()) return Promise.resolve(true)
+    if (auth.loggedIn()) return Promise.resolve(true)
 
     return request.post('/login', {username, password})
       .then(response => {
@@ -18,7 +18,7 @@ let auth = {
         return Promise.resolve(true)
       })
   },
-  logOut () {
+  logout () {
     return request.post('/logout')
   },
   loggedIn () {

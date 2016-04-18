@@ -10,7 +10,7 @@ let fakeRequest = {
       case '/register':
         return server.register(data.username, data.password)
       case '/logout':
-        return server.logOut()
+        return server.logout()
       default:
         break
     }
