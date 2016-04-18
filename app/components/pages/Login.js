@@ -1,14 +1,6 @@
 import React, {Component} from 'react'
+import {connect} from 'react-redux'
 import Form from '../Form'
-
-// Dummy data for static version
-let data = {
-  formState: {
-    username: 'juan',
-    password: 'secret'
-  },
-  currentlySending: false
-}
 
 class Login extends Component {
   constructor (props) {
@@ -18,7 +10,8 @@ class Login extends Component {
   }
 
   render () {
-    let {formState, currentlySending} = data
+    let {dispatch} = this.props
+    let {formState, currentlySending} = this.props.data
 
     return (
       <div className='form-page__wrapper'>
@@ -26,7 +19,7 @@ class Login extends Component {
           <div className='form-page__form-header'>
             <h2 className='form-page__form-heading'>Login</h2>
           </div>
-          <Form data={formState} history={this.props.history} onSubmit={this._login} btnText={'Login'} currentlySending={currentlySending} />
+          <Form data={formState} dispatch={dispatch} history={this.props.history} onSubmit={this._login} btnText={'Login'} currentlySending={currentlySending} />
         </div>
       </div>
     )
@@ -38,7 +31,17 @@ class Login extends Component {
 }
 
 Login.propTypes = {
-  history: React.PropTypes.object
+  data: React.PropTypes.object,
+  history: React.PropTypes.object,
+  dispatch: React.PropTypes.func
 }
 
-export default Login
+// Which props do we want to inject, given the global state?
+function select (state) {
+  return {
+    data: state
+  }
+}
+
+// Wrap the component to inject dispatch and state into it
+export default connect(select)(Login)

@@ -1,14 +1,6 @@
 import React, {Component} from 'react'
+import {connect} from 'react-redux'
 import Form from '../Form'
-
-// Dummy data for static version
-let data = {
-  formState: {
-    username: 'juan',
-    password: 'secret'
-  },
-  currentlySending: false
-}
 
 class Register extends Component {
   constructor (props) {
@@ -18,7 +10,8 @@ class Register extends Component {
   }
 
   render () {
-    let {formState, currentlySending} = data
+    let {dispatch} = this.props
+    let {formState, currentlySending} = this.props.data
 
     return (
       <div className='form-page__wrapper'>
@@ -26,7 +19,7 @@ class Register extends Component {
           <div className='form-page__form-header'>
             <h2 className='form-page__form-heading'>Register</h2>
           </div>
-          <Form data={formState} history={this.props.history} onSubmit={this._register} btnText={'Register'} currentlySending={currentlySending} />
+          <Form data={formState} dispatch={dispatch} history={this.props.history} onSubmit={this._register} btnText={'Register'} currentlySending={currentlySending} />
         </div>
       </div>
     )
@@ -38,7 +31,15 @@ class Register extends Component {
 }
 
 Register.propTypes = {
-  history: React.PropTypes.object
+  data: React.PropTypes.object,
+  history: React.PropTypes.object,
+  dispatch: React.PropTypes.func
 }
 
-export default Register
+function select (state) {
+  return {
+    data: state
+  }
+}
+
+export default connect(select)(Register)

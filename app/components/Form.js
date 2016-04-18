@@ -4,9 +4,16 @@ import LoadingButton from './LoadingButton'
 let assign = Object.assign
 
 class Form extends Component {
+  constructor (props) {
+    super(props)
+
+    this._onSubmit = this._onSubmit.bind(this)
+    this._changeUsername = this._changeUsername.bind(this)
+    this._changePassword = this._changePassword.bind(this)
+  }
   render () {
     return (
-      <form className='form' onSubmit={this._onSubmit.bind(this)}>
+      <form className='form' onSubmit={this._onSubmit}>
         <div className='form__error-wrapper'>
           <p className='form__error form__error--username-taken'>
             Sorry, but this username is already taken.
@@ -31,7 +38,7 @@ class Form extends Component {
             id='username'
             value={this.props.data.username}
             placeholder='frank.underwood'
-            onChange={this._changeUsername.bind(this)}
+            onChange={this._changeUsername}
             autoCorrect='off'
             autoCapitalize='off'
             spellCheck='false' />
@@ -46,7 +53,7 @@ class Form extends Component {
             type='password'
             value={this.props.data.password}
             placeholder='••••••••••'
-            onChange={this._changePassword.bind(this)} />
+            onChange={this._changePassword} />
           <label className='form__field-label' htmlFor='password'>
             Password
           </label>
@@ -96,11 +103,12 @@ class Form extends Component {
 }
 
 Form.propTypes = {
+  dispatch: React.PropTypes.object,
+  data: React.PropTypes.ject,
   onSubmit: React.PropTypes.func,
+  changeForm: React.PropTypes.func,
   btnText: React.PropTypes.string,
-  data: React.PropTypes.object,
-  currentlySending: React.PropTypes.Bool,
-  changeForm: React.PropTypes.Func
+  currentlySending: React.PropTypes.bool
 }
 
 export default Form
