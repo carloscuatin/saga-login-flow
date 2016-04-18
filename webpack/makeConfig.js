@@ -9,7 +9,7 @@ function makeWebpackConfig (options) {
 
   if (options.prod) {
     entry = [
-      path.resolve(__dirname, 'app/index.js')
+      path.resolve(__dirname, '../app/index.js')
     ]
     cssLoaders = ['file-loader?name=[path][name].[ext]', 'postcss-loader']
 
@@ -41,7 +41,7 @@ function makeWebpackConfig (options) {
     entry = [
       'webpack-dev-server/client?http://localhost:3000',
       'webpack/hot/only-dev-server',
-      path.resolve(__dirname, 'app/index.js')
+      path.resolve(__dirname, '../app/index.js')
     ]
     cssLoaders = ['style-loader', 'css-loader', 'postcss-loader']
 
@@ -54,14 +54,14 @@ function makeWebpackConfig (options) {
     devtool: devtool,
     entry: entry,
     output: { // Compile into js/build.js
-      path: path.resolve(__dirname, 'build'),
+      path: path.resolve(__dirname, '../', 'build'),
       filename: 'js/bundle.js'
     },
     module: {
       loaders: [{
         test: /\.js$/, // Transform all .js files required somewhere within an entry point...
         loader: 'babel', // ...with the specified loaders...
-        exclude: path.join(__dirname, '/node_modules/') // ...except for the node_modules folder.
+        exclude: path.join(__dirname, '../', '/node_modules/') // ...except for the node_modules folder.
       }, {
         test: /\.css$/, // Transform all .css files required somewhere within an entry point...
         loaders: cssLoaders // ...with PostCSS
@@ -95,5 +95,4 @@ function makeWebpackConfig (options) {
   }
 }
 
-// Forcing dev mode for now
-module.exports = makeWebpackConfig({prod: false})
+module.exports = makeWebpackConfig
