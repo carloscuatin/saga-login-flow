@@ -13,7 +13,7 @@ function makeWebpackConfig (options) {
       path.resolve(__dirname, '../app/index.js')
     ]
 
-    cssLoaders = ['file-loader?name=[path][name].[ext]', 'postcss-loader'];
+    cssLoaders = ['file-loader?name=[path][name].[ext]', 'postcss-loader']
 
     plugins = [
       new webpack.optimize.UglifyJsPlugin({
@@ -38,10 +38,10 @@ function makeWebpackConfig (options) {
       }),
       new webpack.DefinePlugin({
         'process.env': {
-          NODE_ENV: JSON.stringify('production'),
-        },
+          NODE_ENV: JSON.stringify('production')
+        }
       }),
-      new ExtractTextPlugin('[name].[contenthash].css'),
+      new ExtractTextPlugin('[name].[contenthash].css')
     ]
   } else {
     devtool = 'cheap-eval-source-map'
