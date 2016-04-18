@@ -3,6 +3,7 @@
 let path = require('path')
 let webpack = require('webpack')
 let HtmlWebpackPlugin = require('html-webpack-plugin')
+let ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 function makeWebpackConfig (options) {
   let entry, plugins, cssLoaders, devtool
@@ -11,7 +12,8 @@ function makeWebpackConfig (options) {
     entry = [
       path.resolve(__dirname, '../app/index.js')
     ]
-    cssLoaders = ['file-loader?name=[path][name].[ext]', 'postcss-loader']
+
+    cssLoaders = ['file-loader?name=[path][name].[ext]', 'postcss-loader'];
 
     plugins = [
       new webpack.optimize.UglifyJsPlugin({
@@ -33,7 +35,13 @@ function makeWebpackConfig (options) {
           minifyCSS: true,
           minifyURLs: true
         }
-      })
+      }),
+      new webpack.DefinePlugin({
+        'process.env': {
+          NODE_ENV: JSON.stringify('production'),
+        },
+      }),
+      new ExtractTextPlugin('[name].[contenthash].css'),
     ]
   } else {
     devtool = 'cheap-eval-source-map'
