@@ -16,7 +16,7 @@ import NotFound from './components/pages/NotFound'
 
 let logger = createLogger()
 
-let createStoreWithMiddleware = applyMiddleware(logger)(createStore);
+let createStoreWithMiddleware = applyMiddleware(logger)(createStore)
 let store = createStoreWithMiddleware(reducer)
 
 class LoginFlow extends Component {
