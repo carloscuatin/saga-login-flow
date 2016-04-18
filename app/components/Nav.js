@@ -34,6 +34,10 @@ class Nav extends Component {
       </div>
     )
   }
+
+  _logout () {
+    return
+  }
 }
 
 Nav.propTypes = {

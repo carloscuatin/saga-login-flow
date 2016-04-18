@@ -103,8 +103,8 @@ class Form extends Component {
 }
 
 Form.propTypes = {
-  dispatch: React.PropTypes.object,
-  data: React.PropTypes.ject,
+  dispatch: React.PropTypes.func,
+  data: React.PropTypes.object,
   onSubmit: React.PropTypes.func,
   changeForm: React.PropTypes.func,
   btnText: React.PropTypes.string,
