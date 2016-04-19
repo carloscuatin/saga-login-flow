@@ -1,4 +1,5 @@
 import {CHANGE_FORM, SET_AUTH, SENDING_REQUEST} from '../actions/constants'
+import auth from '../auth';
 
 let assign = Object.assign
 
@@ -8,7 +9,7 @@ let initialState = {
     password: ''
   },
   currentlySending: false,
-  loggedIn: false
+  loggedIn: auth.loggedIn()
 }
 
 function reducer (state = initialState, action) {
