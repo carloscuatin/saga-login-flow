@@ -10,7 +10,7 @@ import createLogger from 'redux-logger'
 import reducer from './reducers'
 import rootSaga from './sagas'
 
-import '../css/main.css'
+import './styles/main.css'
 
 import App from './components/App'
 import Home from './components/pages/Home'
