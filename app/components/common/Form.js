@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import LoadingButton from './LoadingButton'
 
+import {changeForm} from '../../actions'
+
 let assign = Object.assign
 
 class Form extends Component {
@@ -91,10 +93,9 @@ class Form extends Component {
     return assign(this.props.data, change)
   }
 
-  // For later
-  // _emitChange (newState) {
-  //   this.props.dispatch(changeForm(newState))
-  // }
+  _emitChange (newState) {
+    this.props.dispatch(changeForm(newState))
+  }
 
   _onSubmit (evt) {
     evt.preventDefault()
