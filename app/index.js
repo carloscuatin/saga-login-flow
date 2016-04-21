@@ -19,7 +19,9 @@ import Register from './components/Register'
 import Dashboard from './components/Dashboard'
 import NotFound from './components/NotFound'
 
-let logger = createLogger()
+let logger = createLogger({
+  predicate: (getState, action) => action.type !== 'CHANGE_FORM'
+})
 
 let createStoreWithMiddleware = applyMiddleware(logger, createSagaMiddleware(rootSaga))(createStore)
 let store = createStoreWithMiddleware(reducer)
