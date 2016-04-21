@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import LoadingButton from './LoadingButton'
 import {Link} from 'react-router'
 
-import {logout} from '../actions'
+import {logout} from '../../actions'
 
 class Nav extends Component {
   constructor (props) {

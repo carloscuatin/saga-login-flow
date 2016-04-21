@@ -13,11 +13,11 @@ import rootSaga from './sagas'
 import './styles/main.css'
 
 import App from './components/App'
-import Home from './components/pages/Home'
-import Login from './components/pages/Login'
-import Register from './components/pages/Register'
-import Dashboard from './components/pages/Dashboard'
-import NotFound from './components/pages/NotFound'
+import Home from './components/Home'
+import Login from './components/Login'
+import Register from './components/Register'
+import Dashboard from './components/Dashboard'
+import NotFound from './components/NotFound'
 
 let logger = createLogger()
 

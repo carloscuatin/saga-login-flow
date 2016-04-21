@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import Nav from './Nav'
+import Nav from './common/Nav'
 
 class App extends Component {
   render () {
