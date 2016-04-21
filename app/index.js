@@ -24,6 +24,28 @@ let logger = createLogger()
 let createStoreWithMiddleware = applyMiddleware(logger, createSagaMiddleware(rootSaga))(createStore)
 let store = createStoreWithMiddleware(reducer)
 
+function checkAuth (nextState, replace) {
+  let {loggedIn} = store.getState()
+
+  if (nextState.location.pathname !== '/dashboard') {
+    if (loggedIn) {
+      if (nextState.location.state && nextState.location.pathname) {
+        replace(nextState.location.pathname)
+      } else {
+        replace('/')
+      }
+    }
+  } else {
+    if (!loggedIn) {
+      if (nextState.location.state && nextState.location.pathname) {
+        replace(nextState.location.pathname)
+      } else {
+        replace('/')
+      }
+    }
+  }
+}
+
 class LoginFlow extends Component {
   render () {
     return (
@@ -31,9 +53,11 @@ class LoginFlow extends Component {
         <Router history={browserHistory}>
           <Route component={App}>
             <Route path='/' component={Home} />
-            <Route path='/login' component={Login} />
-            <Route path='/register' component={Register} />
-            <Route path='/dashboard' component={Dashboard} />
+            <Route onEnter={checkAuth}>
+              <Route path='/login' component={Login} />
+              <Route path='/register' component={Register} />
+              <Route path='/dashboard' component={Dashboard} />
+            </Route>
             <Route path='*' component={NotFound} />
           </Route>
         </Router>
