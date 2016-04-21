@@ -1,7 +1,7 @@
 import {hashSync} from 'bcryptjs'
 import genSalt from '../auth/salt'
 import {browserHistory} from 'react-router'
-import {take, call, put, fork, cancel} from 'redux-saga/effects'
+import {take, call, put, fork} from 'redux-saga/effects'
 import auth from '../auth'
 
 import {SENDING_REQUEST, LOGIN_REQUEST, SET_AUTH, LOGOUT} from '../actions/constants'
@@ -34,17 +34,20 @@ function * logout () {
   }
 }
 
-export default function * loginFlow () {
+export function * loginFlow () {
   while (true) {
     let request = yield take(LOGIN_REQUEST)
     let {username, password} = request.data
 
-    let authorizeTask = yield fork(authorize, username, password)
+    yield call(authorize, username, password)
     yield put({type: SET_AUTH, newState: true})
     forwardTo('/dashboard')
+  }
+}
 
+export function * logoutFlow () {
+  while (true) {
     yield take(LOGOUT)
-    yield cancel(authorizeTask)
     yield put({type: SET_AUTH, newState: false})
 
     yield call(logout)
@@ -52,7 +55,11 @@ export default function * loginFlow () {
   }
 }
 
+export default function * root () {
+  yield fork(loginFlow)
+  yield fork(logoutFlow)
+}
+
 function forwardTo (location) {
   browserHistory.push(location)
 }
-
