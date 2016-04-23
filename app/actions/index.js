@@ -1,4 +1,11 @@
-import {CHANGE_FORM, SET_AUTH, SENDING_REQUEST, LOGIN_REQUEST, LOGOUT} from './constants'
+import {
+  CHANGE_FORM,
+  SET_AUTH,
+  SENDING_REQUEST,
+  LOGIN_REQUEST,
+  REGISTER_REQUEST,
+  LOGOUT
+} from './constants'
 
 export function changeForm (newState) {
   return {type: CHANGE_FORM, newState}
@@ -18,4 +25,8 @@ export function loginRequest (data) {
 
 export function logout () {
   return {type: LOGOUT}
+}
+
+export function registerRequest (data) {
+  return {type: REGISTER_REQUEST, data}
 }
