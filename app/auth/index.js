@@ -24,11 +24,9 @@ let auth = {
   loggedIn () {
     return !!localStorage.token
   },
-  register (username, password, callback) {
-    let self = this
-
+  register (username, password) {
     return request.post('/register', {username, password})
-      .then(() => self.login(username, password))
+      .then(() => auth.login(username, password))
   },
   onChange () {}
 }
