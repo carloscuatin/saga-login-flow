@@ -28,7 +28,7 @@ class Login extends Component {
   }
 
   _login (username, password) {
-    this.props.dispatch(loginRequest({username: 'juan', password: 'password'}))
+    this.props.dispatch(loginRequest({username, password}))
   }
 }
 
