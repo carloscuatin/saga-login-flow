@@ -9,7 +9,8 @@ import {
   LOGIN_REQUEST,
   REGISTER_REQUEST,
   SET_AUTH,
-  LOGOUT
+  LOGOUT,
+  CHANGE_FORM
 } from '../actions/constants'
 
 function * authorize (username, password, isRegistering) {
@@ -55,6 +56,7 @@ export function * loginFlow () {
     try {
       yield call(authorize, username, password, false)
       yield put({type: SET_AUTH, newState: true})
+      yield put({type: CHANGE_FORM, newState: {username: '', password: ''}})
       forwardTo('/dashboard')
     } catch (error) {
       console.log(error)
@@ -79,6 +81,7 @@ export function * registerFlow () {
 
     yield call(authorize, username, password, true)
     yield put({type: SET_AUTH, newState: true})
+    yield put({type: CHANGE_FORM, newState: {username: '', password: ''}})
     forwardTo('/dashboard')
   }
 }
