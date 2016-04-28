@@ -79,10 +79,14 @@ export function * registerFlow () {
     let request = yield take(REGISTER_REQUEST)
     let {username, password} = request.data
 
-    yield call(authorize, username, password, true)
-    yield put({type: SET_AUTH, newState: true})
-    yield put({type: CHANGE_FORM, newState: {username: '', password: ''}})
-    forwardTo('/dashboard')
+    try {
+      yield call(authorize, username, password, true)
+      yield put({type: SET_AUTH, newState: true})
+      yield put({type: CHANGE_FORM, newState: {username: '', password: ''}})
+      forwardTo('/dashboard')
+    } catch (error) {
+      console.log(error)
+    }
   }
 }
 
