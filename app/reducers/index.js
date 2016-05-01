@@ -1,4 +1,9 @@
-import {CHANGE_FORM, SET_AUTH, SENDING_REQUEST} from '../actions/constants'
+import {
+  CHANGE_FORM,
+  SET_AUTH,
+  SENDING_REQUEST,
+  REQUEST_ERROR
+} from '../actions/constants'
 import auth from '../auth'
 
 let assign = Object.assign
@@ -8,6 +13,7 @@ let initialState = {
     username: '',
     password: ''
   },
+  error: '',
   currentlySending: false,
   loggedIn: auth.loggedIn()
 }
@@ -25,6 +31,10 @@ function reducer (state = initialState, action) {
     case SENDING_REQUEST:
       return assign({}, state, {
         currentlySending: action.sending
+      })
+    case REQUEST_ERROR:
+      return assign({}, state, {
+        error: action.error
       })
     default:
       return state

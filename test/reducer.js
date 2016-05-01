@@ -1,6 +1,11 @@
 import test from 'ava'
 import {reducerTest} from 'redux-ava'
-import {changeForm, setAuthState, sendingRequest} from '../app/actions'
+import {
+  changeForm,
+  setAuthState,
+  sendingRequest,
+  requestError
+} from '../app/actions'
 import app from '../app/reducers'
 
 let stateBefore = {
@@ -31,4 +36,11 @@ test('reducer handles SENDING_REQUEST action', reducerTest(
   stateBefore,
   sendingRequest(true),
   Object.assign({}, stateBefore, {currentlySending: true})
+))
+
+test('reducer handles REQUEST_ERROR action', reducerTest(
+  app,
+  stateBefore,
+  requestError('Wrong password'),
+  Object.assign({}, stateBefore, {error: 'Wrong password'})
 ))
