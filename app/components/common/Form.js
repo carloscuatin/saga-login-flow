@@ -3,8 +3,6 @@ import LoadingButton from './LoadingButton'
 
 import {changeForm} from '../../actions'
 
-let assign = Object.assign
-
 class Form extends Component {
   constructor (props) {
     super(props)
@@ -74,23 +72,11 @@ class Form extends Component {
   }
 
   _changeUsername (event) {
-    let newState = this._mergeWithCurrentState({
-      username: event.target.value
-    })
-
-    this._emitChange(newState)
+    this._emitChange({...this.props.data, username: event.target.value})
   }
 
   _changePassword (event) {
-    let newState = this._mergeWithCurrentState({
-      password: event.target.value
-    })
-
-    this._emitChange(newState)
-  }
-
-  _mergeWithCurrentState (change) {
-    return assign(this.props.data, change)
+    this._emitChange({...this.props.data, password: event.target.value})
   }
 
   _emitChange (newState) {
