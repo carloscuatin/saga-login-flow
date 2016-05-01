@@ -17,10 +17,23 @@ let formState = {
 
 let error = 'Wrong password'
 
-test('changeForm action', actionTest(changeForm, formState, {type: 'CHANGE_FORM', newState: formState}))
-test('setAuthState action', actionTest(setAuthState, true, {type: 'SET_AUTH', newState: true}))
-test('sendingRequest action', actionTest(sendingRequest, true, {type: 'SENDING_REQUEST', sending: true}))
-test('loginRequest action', actionTest(loginRequest, formState, {type: 'LOGIN_REQUEST', data: formState}))
-test('registerRequest action', actionTest(registerRequest, formState, {type: 'REGISTER_REQUEST', data: formState}))
-test('logout action', actionTest(logout, formState, {type: 'LOGOUT'}))
-test('requestError action', actionTest(requestError, error, {type: 'REQUEST_ERROR', error}))
+test('changeForm action',
+  actionTest(changeForm, formState, {type: 'CHANGE_FORM', newState: formState}))
+
+test('setAuthState action',
+  actionTest(setAuthState, true, {type: 'SET_AUTH', newState: true}))
+
+test('sendingRequest action',
+  actionTest(sendingRequest, true, {type: 'SENDING_REQUEST', sending: true}))
+
+test('loginRequest action',
+  actionTest(loginRequest, formState, {type: 'LOGIN_REQUEST', data: formState}))
+
+test('registerRequest action',
+  actionTest(registerRequest, formState, {type: 'REGISTER_REQUEST', data: formState}))
+
+test('logout action',
+  actionTest(logout, formState, {type: 'LOGOUT'}))
+
+test('requestError action',
+  actionTest(requestError, error, {type: 'REQUEST_ERROR', error}))
