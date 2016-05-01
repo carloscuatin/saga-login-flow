@@ -4,7 +4,8 @@ import {
   SENDING_REQUEST,
   LOGIN_REQUEST,
   REGISTER_REQUEST,
-  LOGOUT
+  LOGOUT,
+  REQUEST_ERROR
 } from './constants'
 
 export function changeForm (newState) {
@@ -29,4 +30,8 @@ export function logout () {
 
 export function registerRequest (data) {
   return {type: REGISTER_REQUEST, data}
+}
+
+export function requestError (error) {
+  return {type: REQUEST_ERROR, error}
 }
