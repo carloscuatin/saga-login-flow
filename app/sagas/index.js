@@ -55,8 +55,8 @@ export function * loginFlow () {
 
     try {
       yield call(authorize, username, password, false)
-      yield put({type: SET_AUTH, newState: true})
-      yield put({type: CHANGE_FORM, newState: {username: '', password: ''}})
+      yield put({type: SET_AUTH, newAuthState: true})
+      yield put({type: CHANGE_FORM, newFormState: {username: '', password: ''}})
       forwardTo('/dashboard')
     } catch (error) {
       console.log(error)
@@ -67,7 +67,7 @@ export function * loginFlow () {
 export function * logoutFlow () {
   while (true) {
     yield take(LOGOUT)
-    yield put({type: SET_AUTH, newState: false})
+    yield put({type: SET_AUTH, newAuthState: false})
 
     yield call(logout)
     forwardTo('/')
@@ -81,8 +81,8 @@ export function * registerFlow () {
 
     try {
       yield call(authorize, username, password, true)
-      yield put({type: SET_AUTH, newState: true})
-      yield put({type: CHANGE_FORM, newState: {username: '', password: ''}})
+      yield put({type: SET_AUTH, newAuthState: true})
+      yield put({type: CHANGE_FORM, newFormState: {username: '', password: ''}})
       forwardTo('/dashboard')
     } catch (error) {
       console.log(error)

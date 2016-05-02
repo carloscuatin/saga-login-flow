@@ -8,12 +8,12 @@ import {
   REQUEST_ERROR
 } from './constants'
 
-export function changeForm (newState) {
-  return {type: CHANGE_FORM, newState}
+export function changeForm (newFormState) {
+  return {type: CHANGE_FORM, newFormState}
 }
 
-export function setAuthState (newState) {
-  return {type: SET_AUTH, newState}
+export function setAuthState (newAuthState) {
+  return {type: SET_AUTH, newAuthState}
 }
 
 export function sendingRequest (sending) {

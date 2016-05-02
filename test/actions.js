@@ -18,10 +18,10 @@ let formState = {
 let error = 'Wrong password'
 
 test('changeForm action',
-  actionTest(changeForm, formState, {type: 'CHANGE_FORM', newState: formState}))
+  actionTest(changeForm, formState, {type: 'CHANGE_FORM', newFormState: formState}))
 
 test('setAuthState action',
-  actionTest(setAuthState, true, {type: 'SET_AUTH', newState: true}))
+  actionTest(setAuthState, true, {type: 'SET_AUTH', newAuthState: true}))
 
 test('sendingRequest action',
   actionTest(sendingRequest, true, {type: 'SENDING_REQUEST', sending: true}))

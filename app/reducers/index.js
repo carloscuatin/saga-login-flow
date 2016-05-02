@@ -19,9 +19,9 @@ let initialState = {
 function reducer (state = initialState, action) {
   switch (action.type) {
     case CHANGE_FORM:
-      return {...state, formState: action.newState}
+      return {...state, formState: action.newFormState}
     case SET_AUTH:
-      return {...state, loggedIn: action.newState}
+      return {...state, loggedIn: action.newAuthState}
     case SENDING_REQUEST:
       return {...state, currentlySending: action.sending}
     case REQUEST_ERROR:

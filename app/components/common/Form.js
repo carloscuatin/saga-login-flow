@@ -79,8 +79,8 @@ class Form extends Component {
     this._emitChange({...this.props.data, password: event.target.value})
   }
 
-  _emitChange (newState) {
-    this.props.dispatch(changeForm(newState))
+  _emitChange (newFormState) {
+    this.props.dispatch(changeForm(newFormState))
   }
 
   _onSubmit (evt) {
