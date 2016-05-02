@@ -60,11 +60,11 @@ class Form extends Component {
         </div>
         <div className='form__submit-btn-wrapper'>
           {this.props.currentlySending ? (
-             <LoadingButton />
-             ) : (
-             <button className='form__submit-btn' type='submit'>
+            <LoadingButton />
+          ) : (
+            <button className='form__submit-btn' type='submit'>
                {this.props.btnText}
-             </button>
+            </button>
              )}
         </div>
       </form>
