@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import ErrorMessage from './ErrorMessage'
 import LoadingButton from './LoadingButton'
 
 import {changeForm} from '../../actions'
@@ -12,25 +13,11 @@ class Form extends Component {
     this._changePassword = this._changePassword.bind(this)
   }
   render () {
+    let {error} = this.props
+
     return (
       <form className='form' onSubmit={this._onSubmit}>
-        <div className='form__error-wrapper'>
-          <p className='form__error form__error--username-taken'>
-            Sorry, but this username is already taken.
-          </p>
-          <p className='form__error form__error--username-not-registered'>
-            This username does not exist.
-          </p>
-          <p className='form__error form__error--wrong-password'>
-            Wrong password.
-          </p>
-          <p className='form__error form__error--field-missing'>
-            Please fill out the entire form.
-          </p>
-          <p className='form__error form__error--failed'>
-            Something went wrong, please try again!
-          </p>
-        </div>
+        {error ? <ErrorMessage error={error} /> : null}
         <div className='form__field-wrapper'>
           <input
             className='form__field-input'
@@ -95,6 +82,7 @@ Form.propTypes = {
   onSubmit: React.PropTypes.func,
   changeForm: React.PropTypes.func,
   btnText: React.PropTypes.string,
+  error: React.PropTypes.string,
   currentlySending: React.PropTypes.bool
 }
 

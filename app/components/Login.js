@@ -13,7 +13,7 @@ class Login extends Component {
 
   render () {
     let {dispatch} = this.props
-    let {formState, currentlySending} = this.props.data
+    let {formState, currentlySending, error} = this.props.data
 
     return (
       <div className='form-page__wrapper'>
@@ -21,7 +21,7 @@ class Login extends Component {
           <div className='form-page__form-header'>
             <h2 className='form-page__form-heading'>Login</h2>
           </div>
-          <Form data={formState} dispatch={dispatch} history={this.props.history} onSubmit={this._login} btnText={'Login'} currentlySending={currentlySending} />
+          <Form data={formState} dispatch={dispatch} history={this.props.history} onSubmit={this._login} btnText={'Login'} error={error} currentlySending={currentlySending} />
         </div>
       </div>
     )
