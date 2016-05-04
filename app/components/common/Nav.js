@@ -2,12 +2,13 @@ import React, {Component} from 'react'
 import LoadingButton from './LoadingButton'
 import {Link} from 'react-router'
 
-import {logout} from '../../actions'
+import {logout, requestError} from '../../actions'
 
 class Nav extends Component {
   constructor (props) {
     super(props)
     this._logout = this._logout.bind(this)
+    this._clearError = this._clearError.bind(this)
   }
 
   render () {
@@ -22,15 +23,17 @@ class Nav extends Component {
       </div>
     ) : (
       <div>
-        <Link to='/register' className='btn btn--login btn--nav'>Register</Link>
-        <Link to='/login' className='btn btn--login btn--nav'>Login</Link>
+        <Link to='/register' className='btn btn--login btn--nav' onClick={this._clearError}>Register</Link>
+        <Link to='/login' className='btn btn--login btn--nav' onClick={this._clearError}>Login</Link>
       </div>
     )
 
     return (
       <div className='nav'>
         <div className='nav__wrapper'>
-          <Link to='/' className='nav__logo-wrapper'><h1 className='nav__logo'>Login&nbsp;Flow</h1></Link>
+          <Link to='/' className='nav__logo-wrapper' onClick={this._clearError}>
+            <h1 className='nav__logo'>Login&nbsp;Flow</h1>
+          </Link>
           {navButtons}
         </div>
       </div>
@@ -39,6 +42,10 @@ class Nav extends Component {
 
   _logout () {
     this.props.dispatch(logout())
+  }
+
+  _clearError () {
+    this.props.dispatch(requestError(''))
   }
 }
 
