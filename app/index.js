@@ -24,8 +24,9 @@ let logger = createLogger({
   predicate: (getState, action) => action.type !== 'CHANGE_FORM'
 })
 
-let createStoreWithMiddleware = applyMiddleware(logger, createSagaMiddleware(rootSaga))(createStore)
-let store = createStoreWithMiddleware(reducer)
+let sagaMiddleware = createSagaMiddleware()
+let store = createStore(reducer, applyMiddleware(logger, sagaMiddleware))
+sagaMiddleware.run(rootSaga)
 
 function checkAuth (nextState, replace) {
   let {loggedIn} = store.getState()
