@@ -11,6 +11,8 @@ class Home extends Component {
             <p>This application demonstrates what a React-based register/login workflow might look like with <a href='https://github.com/yelouafi/redux-saga'>redux-saga</a>.</p>
 
             <p>It's based on Max Stoiber's <a href='https://github.com/mxstbr/login-flow'>login-flow</a>. See the full source code on <a href='https://github.com/sotojuan/saga-login-flow'>GitHub</a>!</p>
+
+            <p>Try logging in with username <code>juan</code> and password <code>password</code>, then try to register new users. They'll be saved in local storage so they'll persist across page reloads.</p>
           </section>
 
           <section className='text-section'>
