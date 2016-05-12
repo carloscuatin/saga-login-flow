@@ -10,5 +10,5 @@ test('registers when given good data', t => {
 })
 
 test('returns error when given existing user', t => {
-  t.throws(auth.register('juan', 'password', 'username-exists'))
+  t.throws(auth.register('juan', 'password', 'Username already in use'))
 })

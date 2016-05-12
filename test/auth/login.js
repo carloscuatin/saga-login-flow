@@ -15,11 +15,11 @@ test('returns true on correct login', t => {
 })
 
 test('returns error on wrong password', t => {
-  t.throws(auth.login('juan', 'wrong'), 'password-wrong')
+  t.throws(auth.login('juan', 'wrong'), 'Wrong password')
 })
 
-test('returns error on wrong password', t => {
-  t.throws(auth.login('banana', 'wrong'), 'user-doesnt-exist')
+test('returns error on inexistent user', t => {
+  t.throws(auth.login('banana', 'wrong'), 'User doesn\'t exist')
 })
 
 test('stays logged in until log out', t => {

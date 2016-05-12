@@ -41,9 +41,9 @@ let server = {
         let error
 
         if (userExists) {
-          error = new Error('password-wrong')
+          error = new Error('Wrong password')
         } else {
-          error = new Error('user-doesnt-exist')
+          error = new Error('User doesn\'t exist')
         }
 
         reject(error)
@@ -58,7 +58,7 @@ let server = {
 
         resolve({registered: true})
       } else {
-        reject(new Error('username-exists'))
+        reject(new Error('Username already in use'))
       }
     })
   },
