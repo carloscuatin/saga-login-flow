@@ -9,7 +9,7 @@ import {Provider} from 'react-redux'
 import createLogger from 'redux-logger'
 import reducer from './reducers'
 import rootSaga from './sagas'
-import {requestError} from './actions'
+import {clearError} from './actions'
 
 import './styles/main.css'
 
@@ -31,9 +31,7 @@ sagaMiddleware.run(rootSaga)
 function checkAuth (nextState, replace) {
   let {loggedIn} = store.getState()
 
-  // Clear error on new route
-  // Maybe there's a better way to do this?
-  store.dispatch(requestError(''))
+  store.dispatch(clearError())
 
   if (nextState.location.pathname !== '/dashboard') {
     if (loggedIn) {

@@ -5,7 +5,8 @@ import {
   LOGIN_REQUEST,
   REGISTER_REQUEST,
   LOGOUT,
-  REQUEST_ERROR
+  REQUEST_ERROR,
+  CLEAR_ERROR
 } from './constants'
 
 export function changeForm (newFormState) {
@@ -34,4 +35,8 @@ export function registerRequest (data) {
 
 export function requestError (error) {
   return {type: REQUEST_ERROR, error}
+}
+
+export function clearError () {
+  return {type: CLEAR_ERROR}
 }

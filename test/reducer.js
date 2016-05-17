@@ -4,7 +4,8 @@ import {
   changeForm,
   setAuthState,
   sendingRequest,
-  requestError
+  requestError,
+  clearError
 } from '../app/actions'
 import app from '../app/reducers'
 
@@ -13,6 +14,7 @@ let stateBefore = {
     username: '',
     password: ''
   },
+  error: 'Wrong password',
   currentlySending: false,
   loggedIn: false
 }
@@ -41,6 +43,13 @@ test('reducer handles SENDING_REQUEST action', reducerTest(
 test('reducer handles REQUEST_ERROR action', reducerTest(
   app,
   stateBefore,
-  requestError('Wrong password'),
-  {...stateBefore, error: 'Wrong password'}
+  requestError('Username already in use'),
+  {...stateBefore, error: 'Username already in use'}
+))
+
+test('reducer handles CLEAR_ERROR action', reducerTest(
+  app,
+  stateBefore,
+  clearError(),
+  {...stateBefore, error: ''}
 ))

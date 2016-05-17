@@ -2,7 +2,8 @@ import {
   CHANGE_FORM,
   SET_AUTH,
   SENDING_REQUEST,
-  REQUEST_ERROR
+  REQUEST_ERROR,
+  CLEAR_ERROR
 } from '../actions/constants'
 import auth from '../auth'
 
@@ -26,6 +27,8 @@ function reducer (state = initialState, action) {
       return {...state, currentlySending: action.sending}
     case REQUEST_ERROR:
       return {...state, error: action.error}
+    case CLEAR_ERROR:
+      return {...state, error: ''}
     default:
       return state
   }

@@ -7,7 +7,8 @@ import {
   loginRequest,
   registerRequest,
   logout,
-  requestError
+  requestError,
+  clearError
 } from '../app/actions'
 
 let formState = {
@@ -37,3 +38,6 @@ test('logout action',
 
 test('requestError action',
   actionTest(requestError, error, {type: 'REQUEST_ERROR', error}))
+
+test('clearError action',
+  actionTest(clearError, error, {type: 'CLEAR_ERROR'}))

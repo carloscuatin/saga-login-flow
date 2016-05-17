@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import LoadingButton from './LoadingButton'
 import {Link} from 'react-router'
 
-import {logout, requestError} from '../../actions'
+import {logout, clearError} from '../../actions'
 
 class Nav extends Component {
   constructor (props) {
@@ -45,7 +45,7 @@ class Nav extends Component {
   }
 
   _clearError () {
-    this.props.dispatch(requestError(''))
+    this.props.dispatch(clearError())
   }
 }
 
