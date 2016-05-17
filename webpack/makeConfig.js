@@ -13,7 +13,7 @@ function makeWebpackConfig (options) {
       path.resolve(__dirname, '../app/index.js')
     ]
 
-    cssLoaders = ['file-loader?name=[path][name].[ext]', 'postcss-loader']
+    cssLoaders = ['style-loader', 'css-loader', 'postcss-loader']
 
     plugins = [
       new webpack.optimize.UglifyJsPlugin({
