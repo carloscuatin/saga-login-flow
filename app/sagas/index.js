@@ -14,7 +14,7 @@ import {
   REQUEST_ERROR
 } from '../actions/constants'
 
-function * authorize (username, password, isRegistering) {
+function * authorize (username, password, options) {
   yield put({type: SENDING_REQUEST, sending: true})
 
   try {
@@ -22,7 +22,7 @@ function * authorize (username, password, isRegistering) {
     let hash = hashSync(password, salt)
     let response
 
-    if (isRegistering) {
+    if (options.isRegistering) {
       response = yield call(auth.register, username, hash)
     } else {
       response = yield call(auth.login, username, hash)
@@ -57,7 +57,7 @@ export function * loginFlow () {
     let {username, password} = request.data
 
     let winner = yield race({
-      auth: call(authorize, username, password, false),
+      auth: call(authorize, username, password, {isRegistering: false}),
       logout: take(LOGOUT)
     })
 
@@ -88,7 +88,7 @@ export function * registerFlow () {
     let request = yield take(REGISTER_REQUEST)
     let {username, password} = request.data
 
-    let wasSuccessful = yield call(authorize, username, password, true)
+    let wasSuccessful = yield call(authorize, username, password, {isRegistering: true})
 
     if (wasSuccessful) {
       yield put({type: SET_AUTH, newAuthState: true})
