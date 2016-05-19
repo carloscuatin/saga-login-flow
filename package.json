@@ -4,7 +4,7 @@
   "description": "A login/register flow built with React & Redux Saga",
   "scripts": {
     "start": "node server.js",
-    "build": "NODE_ENV=production webpack --config webpack/prod.js --progress --colors -p",
+    "build": "webpack --config webpack/prod.js --progress --colors -p",
     "test": "standard | snazzy --verbose && NODE_ENV=test ava --verbose"
   },
   "repository": "sotojuan/login-flow",
