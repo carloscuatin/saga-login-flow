@@ -1,7 +1,7 @@
 import {hashSync} from 'bcryptjs'
 import genSalt from '../auth/salt'
 import {browserHistory} from 'react-router'
-import {take, call, put, fork} from 'redux-saga/effects'
+import {take, call, put, fork, race} from 'redux-saga/effects'
 import auth from '../auth'
 
 import {
@@ -30,7 +30,9 @@ function * authorize (username, password, isRegistering) {
 
     return response
   } catch (error) {
-    throw error
+    yield put({type: REQUEST_ERROR, error: error.message})
+
+    return false
   } finally {
     yield put({type: SENDING_REQUEST, sending: false})
   }
@@ -54,13 +56,19 @@ export function * loginFlow () {
     let request = yield take(LOGIN_REQUEST)
     let {username, password} = request.data
 
-    try {
-      yield call(authorize, username, password, false)
+    let winner = yield race({
+      auth: call(authorize, username, password, false),
+      logout: take(LOGOUT)
+    })
+
+    if (winner.auth) {
       yield put({type: SET_AUTH, newAuthState: true})
       yield put({type: CHANGE_FORM, newFormState: {username: '', password: ''}})
       forwardTo('/dashboard')
-    } catch (error) {
-      yield put({type: REQUEST_ERROR, error: error.message})
+    } else if (winner.logout) {
+      yield put({type: SET_AUTH, newAuthState: false})
+      yield call(logout)
+      forwardTo('/')
     }
   }
 }
@@ -80,13 +88,12 @@ export function * registerFlow () {
     let request = yield take(REGISTER_REQUEST)
     let {username, password} = request.data
 
-    try {
-      yield call(authorize, username, password, true)
+    let wasSuccessful = yield call(authorize, username, password, true)
+
+    if (wasSuccessful) {
       yield put({type: SET_AUTH, newAuthState: true})
       yield put({type: CHANGE_FORM, newFormState: {username: '', password: ''}})
       forwardTo('/dashboard')
-    } catch (error) {
-      yield put({type: REQUEST_ERROR, error: error.message})
     }
   }
 }
