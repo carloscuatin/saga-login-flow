@@ -3,17 +3,14 @@
 let path = require('path')
 let webpack = require('webpack')
 let HtmlWebpackPlugin = require('html-webpack-plugin')
-let ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 function makeWebpackConfig (options) {
-  let entry, plugins, cssLoaders, devtool
+  let entry, plugins, devtool
 
   if (options.prod) {
     entry = [
       path.resolve(__dirname, '../app/index.js')
     ]
-
-    cssLoaders = ['style-loader', 'css-loader', 'postcss-loader']
 
     plugins = [
       new webpack.optimize.UglifyJsPlugin({
@@ -40,8 +37,7 @@ function makeWebpackConfig (options) {
         'process.env': {
           NODE_ENV: JSON.stringify('production')
         }
-      }),
-      new ExtractTextPlugin('[name].[contenthash].css')
+      })
     ]
   } else {
     devtool = 'cheap-eval-source-map'
@@ -51,7 +47,6 @@ function makeWebpackConfig (options) {
       'webpack/hot/only-dev-server',
       path.resolve(__dirname, '../app/index.js')
     ]
-    cssLoaders = ['style-loader', 'css-loader', 'postcss-loader']
 
     plugins = [
       new webpack.HotModuleReplacementPlugin()
@@ -61,22 +56,20 @@ function makeWebpackConfig (options) {
   return {
     devtool: devtool,
     entry: entry,
-    output: { // Compile into js/build.js
+    output: { // Compile into `js/build.js`
       path: path.resolve(__dirname, '../', 'build'),
       filename: 'js/bundle.js'
     },
     module: {
-      loaders: [{
-        test: /\.js$/, // Transform all .js files required somewhere within an entry point...
-        loader: 'babel', // ...with the specified loaders...
-        exclude: path.join(__dirname, '../', '/node_modules/') // ...except for the node_modules folder.
-      }, {
-        test: /\.css$/, // Transform all .css files required somewhere within an entry point...
-        loaders: cssLoaders // ...with PostCSS
-      }, {
-        test: /\.jpe?g$|\.gif$|\.png$/i,
-        loader: 'url-loader?limit=10000'
-      }
+      loaders: [
+        {
+          test: /\.js$/, // Transform all .js files required somewhere within an entry point...
+          loader: 'babel', // ...with the specified loaders...
+          exclude: path.join(__dirname, '../', '/node_modules/') // ...except for the node_modules folder.
+        }, {
+          test: /\.css$/, // Transform all .css files required somewhere within an entry point...
+          loaders: ['style-loader', 'css-loader', 'postcss-loader'] // ...with PostCSS
+        }
       ]
     },
     plugins: plugins,
