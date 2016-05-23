@@ -16,15 +16,6 @@ class Home extends Component {
           </section>
 
           <section className='text-section'>
-            <h2>Features</h2>
-            <ul>
-              <li>
-                <p>Features will go here :-)</p>
-              </li>
-            </ul>
-          </section>
-
-          <section className='text-section'>
             <h2>Authentication</h2>
             <p>Authentication happens in <code>app/auth/index.js</code>, using <code>fakeRequest.js</code> and <code>fakeServer.js</code>. <code>fakeRequest</code> is a fake <code>XMLHttpRequest</code> wrapper. <code>fakeServer</code> responds to the fake HTTP requests and pretends to be a real server, storing the current users in local storage with the passwords encrypted using <code>bcrypt</code>.</p>
           </section>
