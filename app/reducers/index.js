@@ -1,3 +1,7 @@
+/*
+ * The reducer takes care of state changes in our app through actions
+ */
+
 import {
   CHANGE_FORM,
   SET_AUTH,
@@ -7,6 +11,7 @@ import {
 } from '../actions/constants'
 import auth from '../auth'
 
+// The initial application state
 let initialState = {
   formState: {
     username: '',
@@ -17,6 +22,7 @@ let initialState = {
   loggedIn: auth.loggedIn()
 }
 
+// Takes care of changing the application state
 function reducer (state = initialState, action) {
   switch (action.type) {
     case CHANGE_FORM:
