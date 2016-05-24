@@ -27,7 +27,7 @@ import {
  * @param  {object} options                Options
  * @param  {boolean} options.isRegistering Is this a register request?
  */
-function * authorize (username, password, options) {
+function * authorize ({username, password, isRegistering}) {
   // We send an action that tells Redux we're sending a request
   yield put({type: SENDING_REQUEST, sending: true})
 
@@ -41,7 +41,7 @@ function * authorize (username, password, options) {
     // module, which is asynchronous. Because we're using generators, we can work
     // as if it's synchronous because we pause execution until the call is done
     // with `yield`!
-    if (options.isRegistering) {
+    if (isRegistering) {
       response = yield call(auth.register, username, hash)
     } else {
       response = yield call(auth.login, username, hash)
@@ -94,7 +94,7 @@ export function * loginFlow () {
     // lead to a race condition. This is unlikely, but just in case, we call `race` which
     // returns the "winner", i.e. the one that finished first
     let winner = yield race({
-      auth: call(authorize, username, password, {isRegistering: false}),
+      auth: call(authorize, {username, password, isRegistering: false}),
       logout: take(LOGOUT)
     })
 
@@ -141,7 +141,7 @@ export function * registerFlow () {
 
     // We call the `authorize` task with the data, telling it that we are registering a user
     // This returns `true` if the registering was successful, `false` if not
-    let wasSuccessful = yield call(authorize, username, password, {isRegistering: true})
+    let wasSuccessful = yield call(authorize, {username, password, isRegistering: true})
 
     // If we could register a user, we send the appropiate actions
     if (wasSuccessful) {
