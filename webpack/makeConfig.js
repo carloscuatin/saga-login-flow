@@ -49,7 +49,10 @@ function makeWebpackConfig (options) {
     ]
 
     plugins = [
-      new webpack.HotModuleReplacementPlugin()
+      new webpack.HotModuleReplacementPlugin(),
+      new HtmlWebpackPlugin({
+        template: 'index.html'
+      })
     ]
   }
 
